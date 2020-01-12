@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+</head>
+<body style="background:#fff;">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
+<script id="jsbin-javascript">
+
+var width = window.innerWidth, height = window.innerHeight / 2;
+
+
+// for some reason canvas need to init as windows prop, otherwise its not in the global scope / and inaccessible to 3js ? / 
+window.canvas ='';
+
+function setup() {
+  window.canvas = createCanvas(640, 480, 'p2d'); 
+}
+
+function draw() {
+  if (mouseIsPressed) {
+    fill(255);
+  } else {
+    fill(255);
+  }
+  ellipse(mouseX, mouseY, 80, 80);
+}
+
+
+// ~~~~THREE JS PART~~~~
+window.addEventListener('load',function(){ 
+    var cam, scene, renderer, geometry, texture, mesh;
+
+    function init() {
+
+        console.log(window.canvas.canvas)
+        // setting up renderer
+        renderer= new THREE.WebGLRenderer();    
+        renderer.setSize(width, height);
+        document.body.appendChild(renderer.domElement);
+        
+        // setting up scene
+        scene = new THREE.Scene();
+      
+        cam = new THREE.PerspectiveCamera(70, width / height, 1, 1000);
+        cam.position.z = 500;
+        scene.add(cam);
+
+        texture = new THREE.Texture(window.canvas.canvas);
+        var material = new THREE.MeshBasicMaterial({ map: texture });
+        geometry = new THREE.BoxGeometry( 200, 200, 200 );
+        mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        // canvas.width = canvas.height = size;
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+      
+        texture.needsUpdate = true;
+        mesh.rotation.y += 0.01;
+        renderer.render(scene, cam);
+    }
+
+    init();
+    animate();
+} ) 
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

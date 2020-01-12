@@ -1,0 +1,71 @@
+body * {
+	margin:0px;
+}
+
+div.view{
+	overflow: hidden;
+}
+div.threeD{
+	position : fixed;
+	top: 0px;
+	left: 0px;
+	mix-blend-mode: exclusion;
+	z-index: 10;
+}
+
+div.background{
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: scroll; 
+}
+
+div.background img {
+	width: 100%;
+	height: 100%;
+	margin-bottom: -5px;
+}
+div.background img:nth-child(even){
+	transform: rotate(180deg);
+}
+
+div.wrapper{
+	z-index: 1;
+	height: 100%
+}
+
+img#deer{
+	z-index: 1;
+	bottom: 0px;
+	position: absolute;
+	width: 200px
+}
+
+div.dog{
+	position: relative;
+	-webkit-perspective: 461px;
+	perspective: 461px;
+	z-index: 8;
+}
+.dog img{
+	position: absolute;
+	-webkit-transform: rotateX(206deg) rotateY(107deg);
+	transform: rotateX(206deg) rotateY(-107deg);
+	right: 0px;
+		-webkit-mask-box-image:url('/assets/textures/loading.gif');
+ 	mask:url('/assets/textures/loading.gif');
+  	-webkit-mask-clip:content-box;
+	
+}
+
+
+form{
+	z-index: 15;
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	transform: scale(5) translate(-50%, -50%);
+	width: 10%;
+}
